@@ -34,24 +34,13 @@ const HeroSection = ({ onGetStarted }: HeroSectionProps) => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight mb-6"
+            className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight mb-12"
           >
             Understand Legal
             <br />
             <span className="text-primary">Documents</span> in Minutes
           </motion.h1>
 
-          {/* Subtitle */}
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
-          >
-            Upload any contract or legal agreement. Our AI breaks down complex 
-            clauses into plain English, identifies hidden risks, and protects 
-            your interests.
-          </motion.p>
 
           {/* CTA Buttons */}
           <motion.div

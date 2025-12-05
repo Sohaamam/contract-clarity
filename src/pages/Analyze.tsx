@@ -1,34 +1,23 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import Header from '@/components/Header';
-import HeroSection from '@/components/HeroSection';
-import FeaturesSection from '@/components/FeaturesSection';
 import DocumentUpload from '@/components/DocumentUpload';
 import AnalysisView from '@/components/AnalysisView';
 import ChatBot from '@/components/ChatBot';
-import { mockAnalysis } from '@/data/mockAnalysis';
 import type { DocumentAnalysis } from '@/types/legal';
 
-const Index = () => {
+const Analyze = () => {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysis, setAnalysis] = useState<DocumentAnalysis | null>(null);
-  const uploadRef = useRef<HTMLDivElement>(null);
-
-  const scrollToUpload = () => {
-    uploadRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
 
   const handleFileSelect = async (file: File) => {
     setIsAnalyzing(true);
     
     // Simulate analysis delay (in production, this would call the AI endpoint)
     setTimeout(() => {
-      setAnalysis({
-        ...mockAnalysis,
-        fileName: file.name,
-        uploadedAt: new Date(),
-      });
+      // For now, just set empty analysis - will be populated by actual AI in production
+      setAnalysis(null);
       setIsAnalyzing(false);
-    }, 3000);
+    }, 2000);
   };
 
   const handleBack = () => {
@@ -42,16 +31,21 @@ const Index = () => {
       {analysis ? (
         <AnalysisView analysis={analysis} onBack={handleBack} />
       ) : (
-        <>
-          <HeroSection onGetStarted={scrollToUpload} />
-          <FeaturesSection />
-          <div ref={uploadRef}>
-            <DocumentUpload 
-              onFileSelect={handleFileSelect} 
-              isAnalyzing={isAnalyzing} 
-            />
+        <div className="container mx-auto px-4 py-16">
+          <div className="max-w-3xl mx-auto text-center mb-12">
+            <h1 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-4">
+              Analyze Your Document
+            </h1>
+            <p className="text-lg text-muted-foreground">
+              Upload a PDF or DOCX file to get started
+            </p>
           </div>
-        </>
+          
+          <DocumentUpload 
+            onFileSelect={handleFileSelect} 
+            isAnalyzing={isAnalyzing} 
+          />
+        </div>
       )}
       
       <ChatBot isAnalyzed={!!analysis} />
@@ -68,4 +62,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Analyze;
