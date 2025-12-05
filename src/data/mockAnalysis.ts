@@ -1,0 +1,86 @@
+import type { DocumentAnalysis } from '@/types/legal';
+
+export const mockAnalysis: DocumentAnalysis = {
+  id: '1',
+  fileName: 'Service_Agreement_2024.pdf',
+  uploadedAt: new Date(),
+  fairnessScore: 62,
+  summary: 'This service agreement contains standard terms for software-as-a-service products. While most clauses are reasonable, there are several areas of concern regarding data usage, liability limitations, and automatic renewal terms that require careful consideration.',
+  complianceIssues: [
+    'No clear refund policy stated',
+    'Data retention period not specified',
+    'Dispute resolution mechanism unclear',
+  ],
+  clauses: [
+    {
+      id: '1',
+      originalText: 'The Licensor grants the Licensee a non-exclusive, non-transferable, revocable license to use the Software solely for internal business purposes, subject to the terms and conditions of this Agreement and any usage limitations specified in the applicable Order Form.',
+      simplifiedText: 'You can use this software for your business, but you cannot share it with others or transfer your access to someone else. The company can take away your access if you break the rules.',
+      riskLevel: 'fine',
+      riskExplanation: 'This is a standard licensing clause that protects the software company\'s intellectual property while giving you the right to use the product. The terms are reasonable and common in software agreements.',
+      realWorldImpact: 'You have the right to use the software as intended. Just remember that you cannot share your login with others or sell your access.',
+      roleExplanations: {
+        tenant: 'As a tenant using property management software, this means you can use the platform to manage your rental properties but cannot share your subscription with other property managers.',
+        employee: 'If your company purchased this software, you can use it for work tasks, but you should not share login credentials with colleagues who are not authorized users.',
+        customer: 'You have full access to use the service as described, but your account is personal to you and cannot be transferred to someone else.',
+        business_owner: 'Your business can use this software internally, but be aware that sharing access beyond your team may violate the agreement.',
+      },
+    },
+    {
+      id: '2',
+      originalText: 'This Agreement shall automatically renew for successive one-year terms unless either party provides written notice of non-renewal at least ninety (90) days prior to the end of the then-current term.',
+      simplifiedText: 'Your subscription will automatically renew every year unless you cancel at least 90 days before your renewal date.',
+      riskLevel: 'risky',
+      riskExplanation: 'The 90-day notice requirement is longer than industry standard (typically 30 days). This could result in being locked into another year if you forget to cancel in time.',
+      realWorldImpact: 'If you want to cancel, you need to remember to do so 3 months before your renewal date. Missing this window means paying for another full year.',
+      roleExplanations: {
+        tenant: 'Mark your calendar! You need to decide whether to continue 3 months before your contract ends, or you\'ll be charged for another year of property management software.',
+        employee: 'Alert your finance or procurement team about this early cancellation deadline to avoid unwanted charges.',
+        customer: 'Set a reminder 4 months before your renewal date so you have time to evaluate alternatives if needed.',
+        business_owner: 'This long notice period could affect your budget planning. Consider negotiating shorter notice periods in future contracts.',
+      },
+    },
+    {
+      id: '3',
+      originalText: 'The Licensee agrees to indemnify, defend, and hold harmless the Licensor and its affiliates, officers, agents, and employees from any claim or demand, including reasonable attorneys\' fees, made by any third party due to or arising out of the Licensee\'s use of the Software.',
+      simplifiedText: 'If someone sues the company because of how you used their software, you agree to pay for their legal defense and any damages.',
+      riskLevel: 'dangerous',
+      riskExplanation: 'This is a very broad indemnification clause that could make you responsible for significant legal costs, even for issues that are not entirely your fault.',
+      realWorldImpact: 'If your use of the software somehow leads to legal issues for the company, you could be on the hook for tens of thousands of dollars in legal fees.',
+      roleExplanations: {
+        tenant: 'If a tenant sues the software company over data you uploaded about them, you might have to pay the company\'s legal bills.',
+        employee: 'Your company assumes liability here. Make sure your employer\'s legal team has reviewed this clause carefully.',
+        customer: 'Be careful about what data you upload or how you use the service. Any legal problems could become your financial responsibility.',
+        business_owner: 'This clause transfers significant legal risk to your business. Consider purchasing additional liability insurance or negotiating limitations on this indemnification.',
+      },
+    },
+    {
+      id: '4',
+      originalText: 'We may collect and use data regarding your use of the Software, including but not limited to usage patterns, feature utilization, and performance metrics, for the purpose of improving our services and for marketing purposes.',
+      simplifiedText: 'The company will track how you use their software and may use that information for marketing. This includes which features you use and how often.',
+      riskLevel: 'risky',
+      riskExplanation: 'The data collection is broad and includes marketing purposes, which could mean your usage data is shared with third parties or used to target you with ads.',
+      realWorldImpact: 'Your business activities within the software could be analyzed and potentially shared. This may raise privacy concerns depending on the sensitivity of your work.',
+      roleExplanations: {
+        tenant: 'Information about your rental properties and how you manage them could be used for marketing purposes.',
+        employee: 'Your work patterns and software usage are being tracked. This data could potentially be linked to your professional profile.',
+        customer: 'Your usage habits help them improve the product, but they\'re also using it for marketing. Consider what this means for your privacy.',
+        business_owner: 'Your business operations data is being collected. Review your privacy obligations to your own customers and ensure this data sharing complies with applicable laws.',
+      },
+    },
+    {
+      id: '5',
+      originalText: 'IN NO EVENT SHALL THE LICENSOR BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO LOSS OF PROFITS, DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES.',
+      simplifiedText: 'If the software causes problems for your business, the company will not pay for lost profits, lost data, or other indirect damages - only direct damages.',
+      riskLevel: 'risky',
+      riskExplanation: 'This limits what you can recover if something goes wrong. If the software crashes and you lose business, you cannot sue for lost profits.',
+      realWorldImpact: 'If a software failure costs your business $50,000 in lost sales, you likely cannot recover that money from the company.',
+      roleExplanations: {
+        tenant: 'If the software goes down and you miss managing important property deadlines, you cannot sue for resulting financial losses.',
+        employee: 'Your company should have backup systems in place. If this software fails, you cannot recover business losses from the provider.',
+        customer: 'Keep backups of important data. If the service loses your information, they are not responsible for the consequences.',
+        business_owner: 'Consider business interruption insurance to protect against losses this limitation of liability creates.',
+      },
+    },
+  ],
+};
